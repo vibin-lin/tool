@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>左右滚</title>
+		<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.box1,.box2{
+			overflow: hidden;
+			float: left;
+		}
+		.box1 img,.box2 img{
+			width: 200px;
+			height: 300px;
+			float: left;
+		}
+		.box_wp{
+			width: 9999999px;
+			overflow: hidden;
+			position: relative;
+		}
+		.box_show{
+			width: 1000px;
+			overflow:hidden;
+			margin: 100px auto;
+			position: relative;
+		}
+
+		#div{
+			width: 200px;
+			height: 200px;
+			border: 10px solid;
+			overflow: hidden;
+		}
+
+	</style>
+	</head>
+	<body>
+		<div class="box_show" id="box_show">
+		<div class="box_wp" id="box_wp">
+			<div class="box1" id="box1">
+				<img src="image/1.jpg" />
+				<img src="image/2.jpg" />
+				<img src="image/3.jpg" />
+				<img src="image/4.jpg" />
+				<img src="image/5.jpg" />
+			</div>
+			<div class="box2" id="box2"></div>
+		</div>
+	</div>
+	<input type="button" id="left" value="left" />
+	<input type="button" name="right" id="right" value="right" />
+	</body>
+	<script>
+	var _box1 = document.getElementById('box1');
+	var _box2 = document.getElementById('box2');
+	_box2.innerHTML = _box1.innerHTML;
+
+	var Box_wp = document.getElementById("box_wp");
+	var t = 0 ;
+	var indexNb = 1;
+	var yyy = 1;
+	var Left = document.getElementById("left");
+	var Right = document.getElementById("right");
+
+
+	var fun = function(){
+		console.log(Box_wp.offsetLeft);
+		if (yyy == 1) {
+				if (Box_wp.offsetLeft%200 == 0) {
+				clearInterval(Timer);
+				setTimeout(function(){
+					indexNb++;
+					Timer = setInterval(fun,1);
+				}, 1000);
+			}
+			Box_wp.style.left = t +"px";
+			t--;
+			if(t <= -_box1.offsetWidth){
+				t = 0;
+				indexNb = 0;
+			}
+		}
+	    if(yyy == 0){
+			console.log(Box_wp.offsetLeft);
+
+			if (Box_wp.offsetLeft%200 == 0) {
+				clearInterval(Timer);
+				setTimeout(function(){
+					indexNb--;
+					Timer = setInterval(fun,1);
+				}, 1000);
+			}
+			Box_wp.style.left = t +"px";
+			t++;
+			if(t >= 0){
+				t = -1000;
+				indexNb = 5;
+			}
+		}
+	}
+
+
+	var Timer = setInterval(fun,1);
+	Left.onclick = function(){
+		yyy = 1;
+		console.log("yyy =1")
+	}
+	Right.onclick = function(){
+		console.log("yyy = 0")
+		yyy = 0;
+	}
+	</script>
+</html>

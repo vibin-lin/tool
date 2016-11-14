@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset='utf-8' />
+	<title></title>
+	<style type="text/css">
+		/*CSS reset*/
+		body,div,img{margin:0;padding:0;}
+		/*结构控制*/
+		.all{width:1200px;height:310px;margin:50px auto;}
+		.main{overflow:hidden;width:1000px;height:310px;margin:0 auto;border:1px solid #0f0;padding:5px 0;float:left;}
+		.pic{width:2000px;height:310px;}
+		.pic div{float:left;}
+		.pic div img{float:left;width:200px;height:310px;}
+
+		p{float:left;line-height:310px;margin:0 10px;font-size:20px;cursor:pointer;cursor:hand;}
+	</style>
+</head>
+
+<body>
+	<div class='all'>
+		<p>left</p>
+		<div class='main' id='main'>
+			<div class='pic' id='pic'>
+				<div class='demo1' id='demo1'>
+					<img src='image/1.jpg' />
+					<img src='image/2.jpg' />
+					<img src='image/3.jpg' />
+					<img src='image/4.jpg' />
+					<img src='image/5.jpg' />
+				</div>
+				<div class='demo2' id='demo2'>
+				</div>
+			</div>
+		</div>
+		<p>right</p>
+	</div>
+
+	<!--javascript功能实现-->
+	<script type="text/javascript">
+		var pics = document.getElementById('main');
+		var demo1 = document.getElementById('demo1');
+		var demo2 = document.getElementById('demo2');
+		var time = null;
+		var time2 = null;
+		var ps = document.getElementsByTagName('p');
+		//初始化demo2内容中的图片
+		demo2.innerHTML=demo1.innerHTML;
+		/*
+		 *页面加载完成后开始执行clock函数
+		 */
+		window.onload = clock;
+		/*
+		 *该函数用于实现滚动
+		 *通过外部计时器对该函数进行多次调用
+		 *函数功能为改变外面div块的scrollLeft值
+		 */
+		function move(n) {
+			if (n==1) {
+				//左滚控制
+				pics.scrollLeft+=2;
+				//临界条件控制
+				if (pics.scrollLeft==demo1.clientWidth) {
+					pics.scrollLeft = 0;
+				}
+				//用于控制滚动的停止
+				if (pics.scrollLeft%200==0) {
+					//需要书写清除计时器以及重新设置计时器
+					clearInterval(time);
+					time = setTimeout(clock,2000);
+				}
+			}
+			else{
+				//右滚控制
+				pics.scrollLeft-=2;
+				//临界条件控制
+				if (pics.scrollLeft==0) {
+					pics.scrollLeft = demo1.clientWidth;
+				}
+				//用于控制滚动的停止
+				if (pics.scrollLeft%200==0) {
+					//需要书写清除计时器以及重新设置计时器
+					clearInterval(time);
+					time = setTimeout(clock2,2000);
+				}
+			}
+		}
+		/*
+		 *clock函数，用于控制滚动的发生
+		 */
+		function clock() {
+			time=setInterval("move(1)",10);		
+		}
+		function clock2() {
+			time=setInterval("move(0)",10);		
+		}
+		/*
+		 *左右键点击实现左右滚动
+		 */
+		ps[0].onclick=function () {
+			clearInterval(time);
+			clock();
+		}
+		ps[1].onclick=function () {
+			clearInterval(time);
+			clock2();		
+		}
+		/*
+		 *鼠标移入移出实现停止与重滚动
+		 */
+		pic.onmouseover = function () {
+			clearTimeout(time);
+		}
+		pic.onmouseout = function () {
+			clock();
+		}
+	</script>
+</body>
+</html>

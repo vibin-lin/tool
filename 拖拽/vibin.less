@@ -1,0 +1,38 @@
+@import "base";
+@import "shape";
+
+*{
+	padding: 0;
+	margin: 0;
+}
+
+.wh(@w:100px,@h:100px){width:@w;height: @h};
+// .div{
+// 	.fzlh(23px,100px,100px);
+// 	background-color: #25FF39;
+// 	.italic();
+// 	.color(red);
+// 	.dy(r);	
+// }
+// .text{
+// 	width:200px;
+// 	height: 400px;
+// 	background-color: red;
+// 	.pie(lt,80px,#f39);
+// }
+.div{
+	.wh(100%,100px);
+	.fz(23px,50px);
+	.color(#FFFD3C);
+	.pr;.arrow(l,10px,#333);background-color:#333;
+}
+.box{
+	.wh();
+	font-size: 2em;
+	top: 200px;
+	left: 200px;
+	position: absolute;
+	.color(red,blue);
+	.italic();
+	background-color: #333;
+}

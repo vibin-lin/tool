@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="du_log.css">
+</head>
+<body>
+	<div class="hui" id="hui">
+<a href="##" id="logoo">登陆</a>
+		<div class="Box" id="Box">
+			<div class="hear">
+			<span>登陆度娘账号</span>
+			<div class="buttons">
+			<a href="###" id="a">X</a></div>
+			</div>
+			<div class="contern">
+				<div class="phone" href="###"><a>(一个手机logo)手机快捷登陆</a></div>
+				<div class="tab">
+					<input type="text" name="Username" placeholder="手机/邮箱/用户名">
+					<input type="text" name="PassWord" placeholder="密码">
+				</div>
+				<p><input type="checkbox"><label>下次自动登陆</label></p>
+				
+				<p>
+						<input type="submit" value="登陆" class = "logoBox">
+				</p>
+
+				<br><br><br><br><br><br><br>
+				<div class="logo">
+					<p>可以用一下方法登陆</p>
+					<p>🐧 &nbsp;&nbsp;&nbsp;&nbsp;  新浪logo</p>
+					<div class="twm">二维码图标</div>
+
+					
+				</div>
+			</div>
+</div>
+</div>
+</body>
+<script type="text/javascript">
+	var box = document.getElementById('Box');
+	var Logo = document.getElementById("logoo");
+	var A =  document.getElementById("a");
+	var Hui = document.getElementById("hui");
+
+	box.onmousedown = function(e){
+		// 兼容
+		var e = e || window.event;
+		// 有兼容问题
+		// offsetX 获取鼠标点击到父体的X轴距离
+		// offsetY 获取鼠标点击到父体的Y轴距离
+
+		// clientX 获取鼠标点击到窗口的X轴距离
+		// clientY 获取鼠标点击到窗口的Y轴距离
+
+		var boxX = e.clientX - this.offsetLeft;
+		var boxY = e.clientY - this.offsetTop;
+
+		document.onmousemove = function(e){
+			var e = e || window.event;
+			var x = e.clientX - boxX;
+			var y = e.clientY - boxY;
+			var w = document.documentElement.clientWidth - box.offsetWidth;
+			var h = document.documentElement.clientHeight - box.offsetHeight;
+			
+			if (x < 0) {
+				x = 0;
+			}else if (x > w) {
+				x = w;
+			}
+			if(y < 0){
+				y = 0;
+			}else if (y > h) {
+				y = h;
+			}
+			box.style.left = x +'px';
+			box.style.top = y +'px';
+		}
+	}
+
+	document.onmouseup = function(){
+		document.onmousemove = null;
+	}
+
+	Logo.onclick = function(){
+		if (box.style.display == "none") {
+			box.style.display = "block";
+			box.style.left = "30%";
+			box.style.top = "15%";
+			Hui.style.background = "#ccc";
+		}else{
+			box.style.display = "none";
+			Hui.style.background = "#fff";
+		}
+	}
+	a.onclick = function(){
+		box.style.display = "none";
+		Hui.style.background = "#fff";
+	}
+
+
+</script>
+</html>

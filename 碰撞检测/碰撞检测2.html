@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+			#div_wp{
+				width: 700px;
+				height: 600px;
+				border: 2px solid;
+				position: relative;
+			}
+			#div{
+				width: 20px;
+				height: 20px;
+				background-color: #ff8888;
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				border-radius: 50%;
+
+			}
+			#box1{
+				position: absolute;
+				width: 100px;
+				height: 100px;
+				top: 250px;
+				left: 250px;
+				background: blue;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div_wp">
+			<div id="div"></div>
+			<div id="box1"></div>
+		</div>
+	</body>
+	<script>
+		var _div = document.getElementById("div");
+		var _div_wp = document.getElementById("div_wp");
+		var Box1 = document.getElementById("box1");
+		//水平
+		var Nb = 0;
+		//垂直
+		var NbT = 0;
+		//移动速度 水平
+		var i = 1;
+		//移动速度 垂直
+		var i2 =2;
+
+		setInterval(function(){
+			Nb+=i;
+			NbT += i2;
+			if(Nb>= _div_wp.clientWidth - _div.offsetWidth || Nb <= 0){
+				console.log("碰水平");
+				i*=-1;
+			}
+			if (NbT>=_div_wp.clientHeight - _div.offsetHeight || NbT <= 0) {
+				console.log("碰垂直");
+				i2*=-1;
+			}
+
+			if (( _div.offsetWidth + Nb<=  Box1.offsetLeft + Box1.offsetWidth) && (Nb +_div.offsetWidth>= Box1.offsetLeft)) {
+				// console.log("满足条件1");
+					if ((Box1.offsetTop <= NbT+ _div.offsetHeight) && (NbT + _div.offsetHeight <= Box1.offsetTop + box1.offsetHeight/2)) {
+						console.log("从前面出来了~");
+						// i*=-1;
+						i2*=-1;
+					}
+					if ((NbT <= Box1.offsetTop + Box1.offsetHeight) && (NbT >= Box1.offsetTop + Box1.offsetHeight/2)) {
+						console.log("要从后面进来了");
+						// i*=-1;
+						i2*=-1;
+					}
+				}
+		   if (( NbT >= Box1.offsetTop) && (  _div.offsetHeight + NbT <= Box1.offsetTop + Box1.offsetHeight) ) {
+		   	// console.log("满足条件2");
+					if ((Box1.offsetLeft <= Nb + _div.offsetWidth) && (Nb + _div.offsetWidth <=Box1.offsetLeft + Box1.offsetWidth/2)) {
+						console.log("碰到左边了");
+						i*=-1;
+						// i2*=-1;
+					}
+				    if ((Box1.offsetLeft+Box1.offsetWidth >= Nb) && (Nb >= Box1.offsetLeft + Box1.offsetWidth/2)) {
+						console.log("碰到右边了");
+						i*=-1;
+						// i2*=-1;
+					}
+				}
+			_div.style.left = Nb + "px";
+			_div.style.top = NbT + "px";
+		},1)
+	</script>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.box{
+			width: 400px;
+			overflow:hidden;
+			border:1px solid;
+		}
+		.box span{
+			width: 100px;
+			height:50px;
+			float:left;
+			text-align:center;
+			line-height:50px;
+			font-size:2em;
+		}
+		.box .span:nth-child(1){
+			background-color:red;
+}
+		.box .span:nth-child(2){
+			background-color:green;
+}
+		.box .span:nth-child(3){
+			background-color:blue;
+}
+		.box .span:nth-child(4){
+			background-color:#69c;
+}
+		.box1,.box2,.box3,.box4{
+			width:400px;
+			height:400px;
+			text-align:center;
+			line-height:400px;
+			font-size:3em;
+		}
+		.box1{
+			background-color:yellow;
+		}
+		.box2{
+			background-color:red;
+		}
+		.box3{
+			background-color:pink;
+		}
+		.box4{
+			background-color:blue;
+		}
+		.db{
+			display:block;
+		}
+		.dn{
+			display:none;
+		}
+	</style>
+</head>
+<body>
+	<div class = "box1"	id="box1">内容1</div>
+	<div class = "box2 dn"	id="box2">内容2</div>
+	<div class = "box3 dn"	id="box3">内容3</div>
+	<div class = "box4 dn"	id="box4">内容4</div>
+
+	<div class="box">
+		<span class = "span" id="sp01">标题1</span>
+		<span class = "span" id="sp02">标题2</span>
+		<span class = "span" id="sp03">标题3</span>
+		<span class = "span" id="sp04">标题4</span>
+	</div>
+
+</body>
+<script>
+	var Box1 = document.getElementById("box1");
+	var Box2 = document.getElementById("box2");
+	var Box3 = document.getElementById("box3");
+	var Box4 = document.getElementById("box4");
+
+	var Span1 = document.getElementById("sp01");
+	var Span2 = document.getElementById("sp02");
+	var Span3 = document.getElementById("sp03");
+	var Span4 = document.getElementById("sp04");
+	function Ro(){
+			Box1.className = "dn";
+			Box2.className = "dn";
+			Box3.className = "dn";
+			Box4.className = "dn";
+
+			Span1.className = "";
+			Span1.className = "";
+			Span1.className = "";
+			Span1.className = "";
+	}
+	function btnOp(n){
+		if(n == 1){
+			Ro();
+			Box1.className = "db box1";
+			Span1.className = "span";
+			return;
+		}
+		if(n == 2){
+			Ro();
+			Box2.className = "db box2";
+			Span1.className = "span";
+			return;
+		}
+		if(n == 3){
+			Ro();
+			Box3.className = "db box3";
+			Span1.className = "span";
+			return;
+		}
+		if(n == 4){
+			Ro();
+			Box4.className = "db box4";
+			Span1.className = "span";
+			return;
+		}
+	}
+
+	Span1.onclick = function(){
+		var n = 1;
+		btnOp(n);
+	}
+	Span2.onclick = function(){
+		var n = 2;
+		btnOp(n);
+	}
+	Span3.onclick = function(){
+		var n = 3;
+		btnOp(n);
+	}
+	Span4.onclick = function(){
+		var n = 4;
+		btnOp(n);
+	}
+</script>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽</title>
+	<link rel="stylesheet" type="text/css" href="vibin.css">
+</head>
+<body>
+	<div id='box' class='box'></div>
+
+	
+</body>
+<script type="text/javascript">
+	var box = document.getElementById('box');
+
+	box.onmousedown = function(e){
+		// 兼容
+		var e = e || window.event;
+		// 有兼容问题
+		// offsetX 获取鼠标点击到父体的X轴距离
+		// offsetY 获取鼠标点击到父体的Y轴距离
+
+		// clientX 获取鼠标点击到窗口的X轴距离
+		// clientY 获取鼠标点击到窗口的Y轴距离
+
+		var boxX = e.clientX - this.offsetLeft;
+		var boxY = e.clientY - this.offsetTop;
+
+		document.onmousemove = function(e){
+			var e = e || window.event;
+			var x = e.clientX - boxX;
+			var y = e.clientY - boxY;
+			var w = document.documentElement.clientWidth - box.offsetWidth;
+			var h = document.documentElement.clientHeight - box.offsetHeight;
+			
+			if (x < 0) {
+				x = 0;
+			}else if (x > w) {
+				x = w;
+			}
+			if(y < 0){
+				y = 0;
+			}else if (y > h) {
+				y = h;
+			}
+			box.style.left = x +'px';
+			box.style.top = y +'px';
+		}
+	}
+
+	document.onmouseup = function(){
+		document.onmousemove = null;
+	}
+
+
+</script>
+</html>

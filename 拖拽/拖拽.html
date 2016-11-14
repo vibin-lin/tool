@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>JS拖拽</title>
+	<style>
+	*{padding: 0; margin: 0; }
+	.box{width: 100px;height: 100px;background: blue;position: absolute; }
+	</style>
+	
+</head>
+<body>
+	<div id="box" class="box"></div>
+</body>
+<script>
+		var isDown = false;
+		var ObjLeft, ObjTop, posX, posY, obj;
+		window.onload = function() {
+			obj = document.getElementById('box');
+			obj.onmousedown = down;
+			document.onmousemove = move;
+			document.onmouseup = up;
+		}
+
+		function down(event) {
+			obj.style.cursor = "move";
+			isDown = true;
+			ObjLeft = obj.offsetLeft;
+			ObjTop = obj.offsetTop;
+			posX = parseInt(mousePosition(event).x);
+			posY = parseInt(mousePosition(event).y);
+		}
+
+		function move(event) {
+			if (isDown == true) {
+				var x = parseInt(mousePosition(event).x - posX + ObjLeft);
+				var y = parseInt(mousePosition(event).y - posY + ObjTop);
+				var w = document.documentElement.clientWidth - obj.offsetWidth;
+				var h = document.documentElement.clientHeight - obj.offsetHeight;
+				console.log(x + ',' + y);
+				if (x < 0) {
+					x = 0
+				} else if (x > w) {
+					x = w
+				};
+				if (y < 0) {
+					y = 0
+				}else if (y > h) {
+					y= h
+				};
+
+				obj.style.left = x + 'px';
+				obj.style.top = y + 'px';
+			}
+		}
+
+		function up() {
+			isDown = false;
+		}
+		
+		function mousePosition(evt) {
+			var xPos, yPos;
+			evt = evt || window.event;
+			if (evt.pageX) {
+				xPos = evt.pageX;
+				yPos = evt.pageY;
+			} else {
+				xPos = evt.clientX + document.body.scrollLeft - document.body.clientLeft;
+				yPos = evt.clientY + document.body.scrollTop - document.body.clientTop;
+			}
+			return {
+				x: xPos,
+				y: yPos
+			}
+		}
+	</script>
+</html>

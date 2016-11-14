@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			.righttext{
+				position: absolute;
+				display: none;
+				width: 50px;
+				height: 100px;
+				background-color: cyan;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="righttext" id="righttext">
+			
+		</div>
+		<div id="text">
+			a
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		var _text = document.getElementById("text");
+		var rightt = document.getElementById("righttext");
+		var mouse_x,mouse_y;
+//		
+//		function mousePosition(evt){
+//		if(evt.pageX || evt.pageY){
+//		return {x:evt.pageX,y:evt.pageY};
+//		}
+//		return {
+//		x:evt.clientX + document.body.scrollLeft - document.body.clientLeft,
+//		y:evt.clientY + document.body.scrollTop - document.body.clientTop
+//		};
+//		}
+//		function mouseMove(evt){
+//		var e = evt || window.event;
+//		var m = mousePosition(evt);
+//		document.getElementById('xx').value= m.x;
+//		document.getElementById('yy').value= m.y;
+//		}
+//		// document.onmousemove = mouseMove;
+//		document.onmousemove = function(e){
+//		var e = e || window.event;
+//		var m = mousePosition(e);
+//		document.getElementById('xx').value= m.x;
+//		document.getElementById('yy').value= m.y;
+//		}
+		
+		
+		window.onload = function(){
+			
+			//清除原有
+			document.oncontextmenu = function(e){
+				e.preventDefault();
+			}
+			
+			//获取鼠标xy轴
+			document.onmousemove = function(e){
+				var e = e || window.event;
+				mouse_x = e.clientX;
+				mouse_y = e.clientY;
+				
+				_text.innerHTML = "X" + mouse_x + "</br>" + "Y" +mouse_y;
+				
+				
+			}
+			
+			 document.onmousedown = function(e){
+               if(e.button ==2){
+					rightt.style.top = mouse_y + "px";
+					rightt.style.left = mouse_x + "px";
+					rightt.style.display = "block";
+               }else if(e.button ==0){
+                   rightt.style.display = "none"
+               }
+           }
+		}
+	</script>
+</html>

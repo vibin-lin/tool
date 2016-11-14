@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>大图滚动</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.box1,.box2{
+			overflow: hidden;
+			float: left;
+		} 
+		.box1 img,.box2 img{
+			width: 200px;
+			height: 300px;
+			float: left;
+		}
+		.box_wp{
+			width: 9999999px;
+			overflow: hidden;
+			position: relative;
+		}
+		.box_show{
+			width: 1000px;
+			overflow:hidden;
+			margin: 100px auto;
+			position: relative;
+		}
+
+		#div{
+			width: 200px;
+			height: 200px;
+			border: 10px solid;
+			overflow: hidden;
+		}
+
+	</style>
+
+</head>
+<body>
+	<!-- 显示区域 -->
+	<div class='box_show' id='box_show'>
+		<!-- 容器 -->
+		<div class='box_wp' id='box_wp'>
+			<!-- 第一组 -->
+			<div class='box1' id='box1'>
+				<img src="image/1.jpg" alt="">
+				<img src="image/2.jpg" alt="">
+				<img src="image/3.jpg" alt="">
+				<img src="image/4.jpg" alt="">
+				<img src="image/5.jpg" alt="">
+			</div>	
+			<!-- 第二组 -->
+			<div class='box2' id='box2'></div>
+		</div>
+	</div>
+
+
+
+</body>
+<script type="text/javascript">
+
+	var _box1 = document.getElementById('box1');
+	var _box2 = document.getElementById('box2');
+	_box2.innerHTML = _box1.innerHTML;
+
+	var Box_wp = document.getElementById("box_wp");
+	var t = 0 ;
+	var indexNb = 1;
+	var fun = function(){
+
+		console.log(Box_wp.offsetLeft);
+
+		if (Box_wp.offsetLeft == -(200*indexNb)) {
+			clearInterval(Timer);
+
+			setTimeout(function(){
+				indexNb++;
+				Timer = setInterval(fun,1);
+			}, 1000);
+		}
+		Box_wp.style.left = t +"px";
+		t--;
+		if(t <= -_box1.offsetWidth){
+			t = 0;
+			indexNb = 0;
+		}
+	}
+	var Timer = setInterval(fun,1);
+
+
+
+
+	
+
+
+
+</script>
+</html>

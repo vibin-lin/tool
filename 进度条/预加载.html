@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<style type="text/css">
+			.game_main{
+			    position: absolute;
+			    width: 100%;
+			    height: 100%;
+			    overflow: hidden;
+			}
+			.lon_wrap{
+			    position: absolute;
+			    margin: 0 auto;
+			    top: 50%;
+			    margin-top: -1.5%;
+			    left: 50%;
+			    margin-left: -40%;
+			    width: 80%;
+			    height: 3%;
+			    border-radius: 50px;
+			    background: rgba(100, 30, 193, 1)
+			
+			}
+			.lon_wrap i{
+			    border-radius:50px;
+			    display:block;
+			    width:0%;
+			    height:100%;
+			    background:#FFF;
+			}
+			.lon{
+			    position: absolute;
+			    z-index: 999;
+			    text-align:center;
+			    width:100%;
+			    height:100%;
+			    background:rgb(16, 6, 40);
+			}
+			.game_op0{
+			    opacity: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="lon">
+    <div class="lon_wrap">
+       <i></i>
+    </div>
+</div>
+	</body>
+	<script type="text/javascript">
+		var _loIndex = 0; 
+		var loadArr=["test/214.jpg","test/215.jpg","test/216.jpg"];
+			for(var i in loadArr){
+			_loIndex++;
+		}
+		var myNum=0;
+		for (var i = 0; i < loadArr.length; i++) {
+			var nImg=new Image();
+			nImg.src=loadArr[i]
+			nImg.onload=function(){
+				myNum++;
+				$(".lon_wrap i").css({'width':(myNum/_loIndex)*100 + "%"});
+				if(myNum==3){
+					$(".lon").css({"display":"none"});
+					$(".wraper").removeClass('dn');
+				}
+			}
+		};
+
+	</script>
+</html>

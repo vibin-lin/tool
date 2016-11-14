@@ -1,0 +1,37 @@
+*{
+	margin:0;
+	padding:0;
+}
+#Box{
+	width:300px;
+	margin:100px auto;
+	background:white;
+	border:2px solid red;
+	border-radius:5px;
+}
+.text{
+	width:280px;
+	border:1px solid red;
+	height:50px;
+	margin:10px;
+	font-size:24px;
+	text-align:right;
+	background:#ffffff;
+}
+.buttons{
+	margin:5px 0 0 4px;
+	position:relative;
+}
+.button{
+	width:70px;
+	height:50px;
+	margin-bottom:5px;
+	border:1px solid red;
+	font-weight:bold;
+}
+.button:hover{
+	background:#69c;
+}
+.long{
+	width:145px;
+}

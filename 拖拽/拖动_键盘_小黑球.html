@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽</title>
+	<link rel="stylesheet" type="text/css" href="css/less.css">
+</head>
+<body>
+	<div id='box' class='box'></div>
+
+	
+</body>
+<script type="text/javascript">
+	var box = document.getElementById('box');
+	box.onmousedown = function(e){
+		// 兼容
+		var e = e || window.event;
+		// 有兼容问题
+		// offsetX 获取鼠标点击到父体的X轴距离
+		// offsetY 获取鼠标点击到父体的Y轴距离
+
+		// clientX 获取鼠标点击到窗口的X轴距离
+		// clientY 获取鼠标点击到窗口的Y轴距离
+
+		var boxX = e.clientX - this.offsetLeft;
+		var boxY = e.clientY - this.offsetTop;
+
+		document.onmousemove = function(e){
+			var e = e || window.event;
+			var x = e.clientX - boxX;
+			var y = e.clientY - boxY;
+			var w = document.documentElement.clientWidth - box.offsetWidth;
+			var h = document.documentElement.clientHeight - box.offsetHeight;
+			
+			if (x < 0) {
+				x = 0;
+			}else if (x > w) {
+				x = w;
+			}
+			if(y < 0){
+				y = 0;
+			}else if (y > h) {
+				y = h;
+			}
+			box.style.left = x +'px';
+			box.style.top = y +'px';
+		}
+	}
+
+	document.onmouseup = function(){
+		document.onmousemove = null;
+	}
+	
+	//键盘事件
+	document.onkeydown = function(e){
+		// 兼容
+		var e = e || window.event;
+		
+		var x = box.offsetLeft;
+		var y = box.offsetTop;
+		var w = document.documentElement.clientWidth - box.offsetWidth;
+		var h = document.documentElement.clientHeight - box.offsetHeight;
+		//键盘点击_上
+		if(e.keyCode == 38){
+			y = y - 10;
+			console.log("上" + y);
+		}
+		//键盘点击_右
+		if(e.keyCode == 39){
+			x = x + 10;
+			console.log("右" + x);
+		}
+		//键盘点击_下
+		if (e.keyCode == 40) {
+			y = y + 10;
+			console.log("下" + y);
+		}
+		//键盘点击_左
+		if (e.keyCode == 37) {
+			x = x - 10;
+			console.log("左" + x);
+		}
+		if (x < 0) {
+			x = 0;
+		}else if (x > w) {
+			x = w;
+		}
+		if(y < 0){
+			y = 0;
+		}else if (y > h) {
+			y = h;
+		}
+		box.style.left = x +'px';
+		box.style.top = y +'px';
+		
+	}
+
+</script>
+</html>

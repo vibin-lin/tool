@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#div_wp{
+				width: 700px;
+				height: 700px;
+				border: 2px solid;
+				position: relative;
+			}
+			#div{
+				width: 20px;
+				height: 20px;
+				background-color: #ff8888;
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				border-radius: 50%;
+
+			}
+			#box1{
+				position: absolute;
+				width: 100px;
+				height: 100px;
+				bottom: 0px;
+				left: 250px;
+				background: blue;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div_wp">
+			<div id="div"></div>
+			<div id="box1"></div>
+		</div>
+	</body>
+	<script>
+		var _div = document.getElementById("div");
+		var _div_wp = document.getElementById("div_wp");
+		var Box1 = document.getElementById("box1");
+		//水平
+		var Nb = 0;
+		//垂直
+		var NbT = 0;
+		//移动速度 水平
+		var i = 9;
+		//移动速度 垂直
+		var i2 = 2;
+
+		setInterval(function(){
+			Nb+=i;
+			NbT += i2;
+			if(Nb>= _div_wp.clientWidth - _div.offsetWidth || Nb <= 0){
+				console.log("碰水平");
+				i*=-1;
+			}
+			if (NbT>=_div_wp.clientHeight - _div.offsetHeight || NbT <= 0) {
+				console.log("碰垂直");
+				i2*=-1;
+			}
+
+
+			if ((Nb >= Box1.offsetLeft) && (Nb <= (Box1.offsetLeft + Box1.offsetWidth))) {
+				if (NbT + _div.offsetHeight == Box1.offsetTop){
+					console.log("啊,碰到上面了~");
+					i2*=-1;
+					i *= -1;
+				}
+			}
+
+			if(NbT + _div.offsetHeight>= Box1.offsetTop){
+				if(Nb + _div.offsetWidth>=Box1.offsetLeft){
+				console.log("碰到我左边了");
+				i *= -1;
+				i2*=-1;
+			} if (Nb>=Box1.offsetLeft+Box1.offsetWidth) {
+				console.log("碰到我右边了");
+		 		i *= -1;
+		 		i2*=-1;
+			}
+			}
+			_div.style.left = Nb + "px";
+			_div.style.top = NbT + "px";
+		},1)
+	</script>
+</html>

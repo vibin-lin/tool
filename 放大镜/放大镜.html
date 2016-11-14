@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>放大镜</title>
+	<link rel="stylesheet" type="text/css" href="fdj.css">
+</head>
+<body>
+	<div class="dv_wp01" id="dv_01">
+		<img src="02.jpg" id="im1">
+		<div class="box" id="box"></div>
+	</div>
+	<div class="imgs">
+		<span><img src="01.jpg" id="sim1"></span>
+		<span><img src="02.jpg" id="sim2"></span>
+		<span><img src="03.jpg" id="sim3"></span>
+		<span><img src="04.jpg" id="sim4"></span>
+		<span><img src="05.jpg" id="sim5"></span>
+	</div>
+	<div class="dv_wp02" id="dv_02">
+		<img src="02.jpg" id="im2">
+	</div>
+</body>
+<script type="text/javascript">
+	var box = document.getElementById("box");
+
+	var Dv_01 = document.getElementById("dv_01");
+	var Dv_02 = document.getElementById("dv_02");
+
+	var Img1 = document.getElementById("im1");
+	var Img2 = document.getElementById("im2");
+
+	var Sim1 = document.getElementById("sim1");
+	var Sim2 = document.getElementById("sim2");
+	var Sim3 = document.getElementById("sim3");
+	var Sim4 = document.getElementById("sim4");
+	var Sim5 = document.getElementById("sim5");
+
+	Dv_01.onmousemove = function (e){
+		var e = e || window.event;
+
+		box.style.display = "block";
+		Dv_02.style.display = "block";
+		var _L = e.clientX - Dv_01.offsetLeft - box.offsetWidth/2;
+		var _T = e.clientY - Dv_01.offsetTop - box.offsetHeight/2;
+		
+		
+
+		if (_T <= 0) {
+			_T = 0;
+		}else if (_T >= Dv_01.offsetHeight - box.offsetHeight){
+			_T = Dv_01.offsetHeight - box.offsetHeight;
+		}
+		if (_L <= 0) {
+			_L = 0;
+		}else if (_L >= Dv_01.offsetWidth - box.offsetWidth) {
+			_L = Dv_01.offsetWidth - box.offsetWidth;
+		}
+
+		console.log(_L+"..."+ _T);
+
+		box.style.left = _L + "px";
+		box.style.top = _T + "px";
+
+		var _index = Dv_02.offsetWidth/box.offsetWidth;
+		Dv_02.scrollLeft = box.offsetLeft * _index;
+		Dv_02.scrollTop = box.offsetTop * _index;
+		console.log("_index");
+
+
+	}
+
+
+	Dv_01.onmouseout = function(){
+		box.style.display = "none";
+		Dv_02.style.display = "none";
+	}
+
+	Sim1.onmouseover = function(){
+		console.log("1");
+		Img1.src = "01.jpg";
+		Img2.src = "01.jpg";
+		return false;
+	}
+
+	Sim2.onmouseover = function(){
+		console.log("2");
+		console.log("true");
+		Img1.src = "02.jpg";
+		Img2.src = "02.jpg";
+		return false;
+	}
+
+	Sim3.onmouseover = function(){
+		console.log("3");
+		Img1.src = "03.jpg";
+		Img2.src = "03.jpg";
+		return false;
+	}
+
+	Sim4.onmouseover = function(){
+		console.log("4");
+		Img1.src = "04.jpg";
+		Img2.src = "04.jpg";
+		return false;
+	}
+
+	Sim5.onmouseover = function(){
+		console.log("5");
+		Img1.src = "05.jpg";
+		Img2.src = "05.jpg";
+		return false;
+	}
+</script>
+</html>

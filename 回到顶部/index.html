@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回到顶部</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        .red{
+            position: relative;
+            width: 600px;
+            height:9000px;
+            margin: 0 auto;
+            background-color: darkred;
+        }
+        a{
+            width:50px;
+            height: 50px;
+            position: fixed;
+            left:90%;
+            bottom:30px;
+            display: none;
+            background-color: aquamarine;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="red"></div>
+    <!--加JavaScript:;是为了不要默认的回到顶部-->
+    <a href="JavaScript:;" id="btn" title="回到顶部">按钮</a>
+</body>
+<script>
+    var _a = document.getElementById("btn");
+
+    window.onload = function(){
+
+        var i = 60;
+        window.onscroll = function () {
+            
+        }
+            //获得可视高度
+            var clientHeight = document.body.clientHeight || document.documentElement.clientHeight;
+
+        _a.onclick = function(){
+            var Timer = setInterval(function(){
+                //console.log("osTOp"+osTop);
+                var osTop = document.documentElement.scrollTop || document.body.scrollTop;
+                if(osTop>=clientHeight){
+                    _a.style.display = "block";
+                }else{
+                    _a.style.display = "none";
+                }
+                osTop = osTop - i;
+                i = i + 10;
+
+                document.documentElement.scrollTop = document.body.scrollTop = osTop;
+                if(osTop<=0){
+                    clearInterval(Timer);
+                    i = 60;
+                }
+            },10);
+        }
+    }
+</script>
+</html>

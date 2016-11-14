@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>进度条</title>
+	<style type="text/css">
+		.box{
+			width:400px;
+			height: 25px;
+			border:1px solid #2FFF32;
+		}
+		.div{
+			height: 25px;
+			background-color: blue;
+			color:white;
+			text-align: center;
+			line-height: 25px;
+		}
+	</style>
+</head>
+<body>
+<div class="box">
+	<div class="div" id="div" style="width: 1%">
+		
+	</div>
+</div>
+	
+</body>
+<script type="text/javascript">
+	Div = document.getElementById("div");
+	function a(){
+		Div.style.width = parseInt(Div.style.width) + 1 + "%";
+		Div.innerHTML = Div.style.width;
+		if (Div.style.width == "100%") {
+			clearInterval(b);
+		}
+
+	} 
+	var b = setInterval(function(){
+		a();
+	},1000);
+</script>
+</html>
